@@ -27,19 +27,20 @@ if (isset($_GET['flag'])) {
 	if($flag=="completed-exercises"){
 		$ex->completedExercises($user->getSessionId());
 	}
+	if($flag=="fetch-data"){
+		$ex->fetchData($_GET['id']);
+	}
 
 }
 
 //all data postings.[updates, deletes,saves]
 if (isset($_POST['flag'])) {
 	$flag = $_POST['flag'];
-
 	if ($flag == "login-user") {
 		$username = $_POST['user'];
 		$password = "";
 		$ajax = $_POST['ajax'];
-		$p_login = $_POST['programmer-login'];
-
+		$p_login = "true";
 		$query = '';
 		if ($p_login == "false") {
 			$query = "SELECT * FROM users WHERE email=? AND acss=?";
@@ -53,13 +54,13 @@ if (isset($_POST['flag'])) {
 
 	}
 	if ($flag == "pick-exercise") {
-
 		$excode = $_POST['excode'];
 		$user = $_SESSION['userId'];
+		// echo $user."$".$excode;
 		$query = "UPDATE exercises SET assignee=?,assigned=1 WHERE exCode=?";
-
 		$Arrdata = array($user, $excode);
 		$ex -> pickExercise($query, $Arrdata);
+		
 	}
 	if ($flag == "save-programmer") {
 		$u -> userCode = $u -> generateUserCode();
@@ -72,10 +73,11 @@ if (isset($_POST['flag'])) {
 		$u -> location = $_POST['location'];
 		$u -> phonenumber = intval($_POST['phonenumber']);
 		$u -> createProgrammer();
-
+		
+		
 	}
 	if ($flag == "save-solution") {
-
+		
 		$types = array("html", "css", "php", "js");
 		$resp = '';
 		if (empty($_FILES['solutionfiles'])) {
@@ -89,8 +91,7 @@ if (isset($_POST['flag'])) {
 			$ex -> filename = $_FILES['solutionfiles']['name'];
 			$ex -> filetmp_name = $_FILES['solutionfiles']['tmp_name'];
 			$ex -> filetype = $_FILES['solutionfiles']['type'];
-			$solfolder=$_POST['solutionId'];
-			
+			$solfolder=$_POST['solutionId'];			
 			$ex->uploadSolution($solfolder);
 		}
 

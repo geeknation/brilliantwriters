@@ -10,13 +10,13 @@ require_once "_archix/User.php";
 require_once "_archix/_Global.php";
 
 if (isset($_POST['createaccount'])) {
-
+	
 	$email = $_POST['email'];
 	$password = $_POST['password'];
 	$phonenumber = $_POST['phonenumber'];
 	$location = $_POST['location'];
 	$files = $_FILES['exercise']['name'];
-
+	$category=$_POST['project-category'];
 	$encrypt = md5("emptyfile");
 	if (empty($files)) {
 		header('Location: index.php?flag=emptyfile&m=' . $encrypt);
@@ -47,6 +47,7 @@ if (isset($_POST['createaccount'])) {
 		$exercise -> filetmp_name = $_FILES['exercise']['tmp_name'];
 		$exercise -> filesize = $_FILES['exercise']['size'];
 		$exercise -> filetype = $_FILES['exercise']['type'];
+		$exercise -> category=$category;
 		$exercise->assigned=0;
 		$exercise->assignee="";
 		$exercise->timeCompleted="";

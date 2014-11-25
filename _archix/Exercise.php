@@ -17,6 +17,7 @@ class Exercise {
 	public $filetmp_name;
 	public $filetype;
 	public $filesize;
+	public $category;
 	private $solutionsFolder = "../exercises_solutions/";
 	function getName() {
 		include "dbconn.inc.php";
@@ -35,9 +36,9 @@ class Exercise {
 
 		if (move_uploaded_file($this -> filetmp_name, $path)) {
 			include "dbconn.inc.php";
-			$query = "INSERT INTO exercises(exCode,path,timeUploaded,assignee,timeCompleted,solutionPath,format,size,completed,assigned) VALUES(?,?,?,?,?,?,?,?,?,?)";
+			$query = "INSERT INTO exercises(exCode,path,category,timeUploaded,assignee,timeCompleted,solutionPath,format,size,completed,assigned) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 			$stmt = $conn -> prepare($query);
-			$data = array($this -> exCode, $path, $this -> timeUploaded, $this -> assignee, $this -> timeCompleted, $this -> solutionPath, $this -> filetype, $this -> filesize, $this -> completed, $this -> assigned);
+			$data = array($this -> exCode, $path,$this->category, $this -> timeUploaded, $this -> assignee, $this -> timeCompleted, $this -> solutionPath, $this -> filetype, $this -> filesize, $this -> completed, $this -> assigned);
 			$stmt -> execute($data);
 			if ($stmt -> rowCount() == 1) {
 				return "uploaded";
@@ -52,13 +53,22 @@ class Exercise {
 
 	function fetchAllEx() {
 		include "dbconn.inc.php";
-		$query = "SELECT exercises.exCode,exercises.path,exercises.timeUploaded,exercises.assigned,users.exCode,users.email FROM progex.exercises INNER JOIN progex.users on exercises.id=users.id WHERE exercises.assigned=0 AND exercises.paid=1";
+		$query = "SELECT exercises.exCode,exercises.path,exercises.timeUploaded,exercises.assigned,users.exCode,users.email FROM progex.exercises INNER JOIN progex.users on exercises.id=users.id WHERE exercises.assigned=0 AND exercises.paid=0";
 		$stmt = $conn -> prepare($query);
 		$stmt -> execute();
 		$data = $stmt -> fetchAll();
 		echo json_encode($data);
 	}
-
+	
+	function fetchData($id){
+		include "dbconn.inc.php";
+		$query = "SELECT exercises.exCode,exercises.path,exercises.timeUploaded,exercises.assigned,users.exCode,users.email FROM progex.exercises INNER JOIN progex.users on exercises.exCode=users.exCode WHERE exercises.exCode='".$id."'";
+		$stmt = $conn -> prepare($query);
+		$stmt -> execute();
+		$data = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+		echo json_encode($data);
+	}
+	
 	function completedExercises($sessionId) {
 		include "dbconn.inc.php";
 

@@ -221,10 +221,10 @@ Please upload an exercise.
 					var location = $("#location").val();
 					var phonenumber = $("#phonenumber").val();
 					var email = $("#email").val();
-					var category=$("#project-category").val();
+					var category=$("#project-category").is(":selected");
 					var empty = Array();
 					var counter = 0;
-					
+
 					$("input[type=text]").each(function() {
 						if ($(this).val() == '' || $(this).val() == null) {
 							empty[counter] = "empty";
@@ -258,7 +258,6 @@ Please upload an exercise.
 						return false;
 					}else if(category=="Select a project category"){
 						window.alert("please select a project category");
-						return false;
 					}
 
 					//submit the form

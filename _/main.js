@@ -222,28 +222,32 @@ completed.click(function() {
 	});
 });
 function sendSolution(id) {
+	$(".email-soln").modal();
+	
+	
 	$.ajax({
-		url : "engine.php",
-		cache : false,
-		type : "post",
-		data : {
-			flag : "send-solution",
-			id : id
-		},
-		beforeSend : function() {
-			//show loader
-			console.log("start");
-		},
-		success : function() {
-			//hide the loader
-			console.log("completed");
-		},
-		error : function(xhr, ajaxOptions, thrownError) {
-
-		},
-	}).done(function(data) {
-		console.log(data);
-	});
+			url : "engine.php",
+			cache : false,
+			type : "GET",
+			data : {
+				flag : "fetch-data",
+				id : id
+			},
+			dataType:"json",
+			beforeSend : function() {
+				//show loader
+				console.log("start");
+			},
+			error : function(xhr, ajaxOptions, thrownError) {
+	
+			},
+		}).done(function(data) {
+			$("#recipient").html(data[0].email);
+			
+			
+			 	
+		});
+	
 }
 
 function ampmTime(date) {
@@ -361,15 +365,18 @@ function pickExercise(id) {
 		data : $data,
 		type : "POST",
 		beforeSend : function() {
-
+			
 		},
 		complete : function() {
-
+			
 		},
 		success : function(data) {
+			console.log(data);
 			if (data.pickExercise == "success") {
 				fetchAllEx();
 				alertify.success("Exercise has been assigned to you.");
+			}else{
+				alertify.error("Error picking exercise, kindly try again");
 			}
 		}
 	});

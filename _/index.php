@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Progammer||Login</title>
+		<title>Brilliant Writers||Login</title>
 		<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/menus-nr-min.css">
 		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" type="text/css">
 		<link rel="stylesheet" href="style.css" type="text/css">
@@ -36,7 +36,7 @@
 				</div>
 				<div class="form-group">
 					<input type="checkbox" id="programmer-login" value="programmer-login">
-					<b>Login as programmer</b>
+					<b>Login as Writer</b>
 				</div>
 				<input type="button" class="btn btn-warning btn-lg" id="loginbutton" value="Login"/>
 			</form>

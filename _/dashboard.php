@@ -7,7 +7,7 @@ $user -> checkSession();
 <html lang="en">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>PROGEX ADMIN PANEL</title>
+		<title>Brilliant writers Admin Panel</title>
 		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" type="text/css">
 		<link rel="stylesheet" href="style.css" type="text/css">
 		<link rel="stylesheet" href="alertify.js-0.3.9/themes/alertify.default.css" type="text/css">
@@ -78,9 +78,9 @@ $user -> checkSession();
 					<li class="">
 						<a href="#myexercises" class="myexercises">My exercises</a>
 					</li>
-					<li class="">
+					<!-- <li class="">
 						<a href="#createprogrammer" id="createprogrammer">Create Programmer</a>
-					</li>
+					</li> -->
 				</ul>
 			</div>
 			<div class="right-panel">
@@ -91,15 +91,14 @@ $user -> checkSession();
 			</div>
 
 		</div>
+		
+		<script type="text/javascript" src="../libs/jquery1.9.js"></script>
+		<script type="text/javascript" src="alertify.js-0.3.9/src/alertify.js"></script>
+		<script type="text/javascript" src="jquery.form.js"></script>
+		<script type="text/javascript" src="main.js"></script>
 		<?php
 		include "modals.php";
 		?>
-		<script type="text/javascript" src="../libs/jquery1.9.js"></script>
-		<script type="text/javascript" src="alertify.js-0.3.9/src/alertify.js"></script>
-		<script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
-		<script type="text/javascript" src="jquery.form.js"></script>
-		<script type="text/javascript" src="main.js"></script>
-
 	</body>
 </html>
 
